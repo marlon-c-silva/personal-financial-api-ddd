@@ -4,7 +4,7 @@ import { ICategoryRepository } from '@domain/repositories/ICategoryRepository';
 export class InMemoryCategoryRepository implements ICategoryRepository {
     private categories: Category[] = [
         new Category({
-            name: 'Comida',
+            name: 'Alimentação',
             keywords: ['restaurante', 'mercado', 'almoço', 'jantar', 'comida'],
         }),
         new Category({
