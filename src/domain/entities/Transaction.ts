@@ -10,7 +10,23 @@ export interface TransactionProps {
 }
 
 export class Transaction {
-    constructor(private readonly props: TransactionProps) { }
+    constructor(private readonly props: TransactionProps) {
+        this.validate();
+    }
+
+    private validate(): void {
+        // Validação: garantir que o amount seja positivo
+        if (this.props.amount < 0) {
+            throw new Error('Transaction amount cannot be negative');
+        }
+
+        // VALIDAÇÃO DA REGRA DE NEGÓCIO: categoria deve permitir o tipo de transação
+        if (!this.props.category.allowsType(this.props.type)) {
+            throw new Error(
+                `Category '${this.props.category.name}' does not allow transaction type '${this.props.type}'`
+            );
+        }
+    }
 
     get id(): string {
         return this.props.id;
