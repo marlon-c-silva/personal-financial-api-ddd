@@ -2,6 +2,7 @@ import { Transaction } from '../../domain/entities/Transaction';
 import { Category } from '../../domain/entities/Category';
 import { ITransactionRepository } from '../../domain/repositories/ITransactionRepository';
 import { ICategoryRepository } from '../../domain/repositories/ICategoryRepository';
+import { randomUUID } from 'crypto';
 
 export interface CreateTransaction {
     description: string;
@@ -21,7 +22,7 @@ export class CreateTransactionUseCase {
         const category = Category.categorizeTransaction(data.description, categories);
 
         const transaction = new Transaction({
-            id: Date.now().toString(),
+            id: randomUUID(),
             description: data.description,
             amount: data.amount,
             date: data.date || new Date(),
