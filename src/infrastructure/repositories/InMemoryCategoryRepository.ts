@@ -6,26 +6,37 @@ export class InMemoryCategoryRepository implements ICategoryRepository {
         new Category({
             name: 'Alimentação',
             keywords: ['restaurante', 'mercado', 'almoço', 'jantar', 'comida'],
+            allowedTypes: ['DESPESA']
         }),
         new Category({
             name: 'Transporte',
-            keywords: ['uber', 'ônibus', 'gasolina', 'táxi', 'metrô', 'combustível'],
+            keywords: ['uber', 'ônibus', 'gasolina', 'táxi', 'metrô', 'combustível', 'combustivel'],
+            allowedTypes: ['DESPESA']
         }),
         new Category({
             name: 'Moradia',
             keywords: ['aluguel', 'hipoteca', 'eletricidade', 'água', 'internet', 'condomínio'],
+            allowedTypes: ['DESPESA']
         }),
         new Category({
             name: 'Lazer',
             keywords: ['cinema', 'filme', 'netflix', 'spotify', 'jogo'],
+            allowedTypes: ['DESPESA']
         }),
         new Category({
             name: 'Saúde',
             keywords: ['médico', 'hospital', 'medicamento', 'farmácia', 'saúde'],
+            allowedTypes: ['DESPESA']
         }),
         new Category({
             name: 'Salário',
             keywords: ['salário', 'pagamento', 'renda'],
+            allowedTypes: ['RECEITA']
+        }),
+        new Category({
+            name: 'Renda Extra',
+            keywords: ['freelancer', 'bico', 'renda extra', 'salário', 'pagamento', 'renda'],
+            allowedTypes: ['RECEITA']
         })
     ];
 
