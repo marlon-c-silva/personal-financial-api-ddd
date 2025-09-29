@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { CreateTransactionUseCase } from '@application/use-cases/CreateTransactionUseCase';
-import { GetFinancialAnalysisUseCase } from '@application/use-cases/GetFinancialAnalysisUseCase';
-import { ListTransactionsUseCase } from '@application/use-cases/ListTransactionsUseCase';
+import { CreateTransactionUseCase } from '../../../application/use-cases/CreateTransactionUseCase';
+import { GetFinancialAnalysisUseCase } from '../../../application/use-cases/GetFinancialAnalysisUseCase';
+import { ListTransactionsUseCase } from '../../../application/use-cases/ListTransactionsUseCase';
 
 export class TransactionController {
     constructor(

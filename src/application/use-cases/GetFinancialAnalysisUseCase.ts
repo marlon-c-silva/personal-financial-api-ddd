@@ -1,5 +1,5 @@
-import { FinancialAnalysisService, FinancialAnalysisResult } from '@domain/services/FinancialAnalysisService';
-import { ITransactionRepository } from '@domain/repositories/ITransactionRepository';
+import { FinancialAnalysisService, FinancialAnalysisResult } from '../../domain/services/FinancialAnalysisService';
+import { ITransactionRepository } from '../../domain/repositories/ITransactionRepository';
 
 export class GetFinancialAnalysisUseCase {
     constructor(private transactionRepository: ITransactionRepository) { }

@@ -1,5 +1,5 @@
-import { Transaction } from '@domain/entities/Transaction';
-import { ITransactionRepository } from '@domain/repositories/ITransactionRepository';
+import { Transaction } from '../../domain/entities/Transaction';
+import { ITransactionRepository } from '../../domain/repositories/ITransactionRepository';
 
 export class ListTransactionsUseCase {
     constructor(private transactionRepository: ITransactionRepository) { }

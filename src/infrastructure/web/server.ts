@@ -3,9 +3,9 @@ import { TransactionController } from './controllers/TransactionController';
 import { errorHandler } from './middleware/errorHandler';
 import { InMemoryTransactionRepository } from '../repositories/InMemoryTransactionRepository';
 import { InMemoryCategoryRepository } from '../repositories/InMemoryCategoryRepository';
-import { CreateTransactionUseCase } from '@application/use-cases/CreateTransactionUseCase';
-import { GetFinancialAnalysisUseCase } from '@application/use-cases/GetFinancialAnalysisUseCase';
-import { ListTransactionsUseCase } from '@application/use-cases/ListTransactionsUseCase';
+import { CreateTransactionUseCase } from '../../application/use-cases/CreateTransactionUseCase';
+import { GetFinancialAnalysisUseCase } from '../../application/use-cases/GetFinancialAnalysisUseCase';
+import { ListTransactionsUseCase } from '../../application/use-cases/ListTransactionsUseCase';
 
 const transactionRepository = new InMemoryTransactionRepository();
 const categoryRepository = new InMemoryCategoryRepository();

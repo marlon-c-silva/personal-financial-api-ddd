@@ -1,7 +1,7 @@
-import { Transaction } from '@domain/entities/Transaction';
-import { Category } from '@domain/entities/Category';
-import { ITransactionRepository } from '@domain/repositories/ITransactionRepository';
-import { ICategoryRepository } from '@domain/repositories/ICategoryRepository';
+import { Transaction } from '../../domain/entities/Transaction';
+import { Category } from '../../domain/entities/Category';
+import { ITransactionRepository } from '../../domain/repositories/ITransactionRepository';
+import { ICategoryRepository } from '../../domain/repositories/ICategoryRepository';
 
 export interface CreateTransaction {
     description: string;
