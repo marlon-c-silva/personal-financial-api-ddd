@@ -1,6 +1,7 @@
 export interface CategoryProps {
     name: string;
     keywords: string[];
+    allowedTypes?: ('RECEITA' | 'DESPESA')[];
 }
 
 export class Category {
@@ -12,6 +13,14 @@ export class Category {
 
     get keywords(): string[] {
         return [...this.props.keywords];
+    }
+
+    get allowedTypes(): ('RECEITA' | 'DESPESA')[] {
+        return this.props.allowedTypes || ['RECEITA', 'DESPESA'];
+    }
+
+    allowsType(transactionType: 'RECEITA' | 'DESPESA'): boolean {
+        return this.allowedTypes.includes(transactionType);
     }
 
     matches(description: string): boolean {
