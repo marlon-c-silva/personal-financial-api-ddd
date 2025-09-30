@@ -10,7 +10,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
-    "demo": "ts-node scripts/demo.ts",
+    "demo": "ts-node scripts/demo-banca.ts",
     "lint": "eslint src/**/*.ts"
   },
   "dependencies": {
