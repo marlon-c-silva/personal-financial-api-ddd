@@ -13,7 +13,7 @@ describe('CasosDeUso', () => {
     transactionRepository = new InMemoryTransactionRepository();
     categoryRepository = new InMemoryCategoryRepository();
     criarTransacaoUseCase = new CreateTransactionUseCase(
-      transactionRepository, 
+      transactionRepository,
       categoryRepository
     );
     obterAnaliseFinanceiraUseCase = new GetFinancialAnalysisUseCase(
@@ -62,7 +62,7 @@ describe('CasosDeUso', () => {
 
   describe('ObterAnaliseFinanceiraUseCase', () => {
     test('deve retornar análise financeira correta', async () => {
-      
+
       await criarTransacaoUseCase.execute({
         description: 'Salário',
         amount: 3200,
@@ -99,4 +99,67 @@ describe('CasosDeUso', () => {
       expect(analise.topExpenses).toHaveLength(0);
     });
   });
+
+  describe('CasosDeUso com Datas Passadas', () => {
+  // ... beforeEach e outros testes
+
+  test('deve criar transação com data específica no passado', async () => {
+    const dataPassada = new Date(2023, 11, 25); // 25 de Dezembro de 2023
+    
+    const transacao = await criarTransacaoUseCase.execute({
+      description: 'Ceia de Natal',
+      amount: 200,
+      type: 'DESPESA',
+      date: dataPassada
+    });
+
+    expect(transacao.date.getUTCFullYear()).toBe(2023);
+    expect(transacao.date.getUTCMonth()).toBe(11); // Dezembro = 11
+    expect(transacao.date.getUTCDate()).toBe(25);
+  });
+
+  test('deve filtrar análise por período específico', async () => {
+    // Transação em Janeiro 2024
+    await criarTransacaoUseCase.execute({
+      description: 'Almoço Janeiro',
+      amount: 40,
+      type: 'DESPESA',
+      date: new Date(2024, 0, 15)
+    });
+
+    // Transação em Fevereiro 2024  
+    await criarTransacaoUseCase.execute({
+      description: 'Almoço Fevereiro',
+      amount: 50,
+      type: 'DESPESA',
+      date: new Date(2024, 1, 15)
+    });
+
+    // Receita em Janeiro 2024
+    await criarTransacaoUseCase.execute({
+      description: 'Salário Janeiro',
+      amount: 3000,
+      type: 'RECEITA',
+      date: new Date(2024, 0, 5)
+    });
+
+    // Análise apenas de Janeiro 2024
+    const inicioJan = new Date(2024, 0, 1);
+    const fimJan = new Date(2024, 0, 31);
+    const analiseJan = await obterAnaliseFinanceiraUseCase.execute(inicioJan, fimJan);
+
+    expect(analiseJan.totalIncome.getValue()).toBe(3000);
+    expect(analiseJan.totalExpenses.getValue()).toBe(40);
+    expect(analiseJan.balance.getValue()).toBe(2960);
+
+    // Análise de Fevereiro 2024
+    const inicioFev = new Date(2024, 1, 1);
+    const fimFev = new Date(2024, 1, 29);
+    const analiseFev = await obterAnaliseFinanceiraUseCase.execute(inicioFev, fimFev);
+
+    expect(analiseFev.totalIncome.getValue()).toBe(0);
+    expect(analiseFev.totalExpenses.getValue()).toBe(50);
+    expect(analiseFev.balance.getValue()).toBe(-50);
+  });
+});
 });
