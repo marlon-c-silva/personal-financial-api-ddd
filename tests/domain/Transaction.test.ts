@@ -102,3 +102,54 @@ describe('Transacao', () => {
         }).toThrow();
     });
 });
+
+describe('Transacao com Datas Passadas', () => {
+    const categoriaAlimentacao = new Category({
+        name: 'Alimentação',
+        keywords: ['restaurante'],
+        allowedTypes: ['DESPESA']
+    });
+
+    test('deve criar transação com data no passado corretamente', () => {
+        const dataPassada = new Date('2023-01-15');
+        const transacao = new Transaction({
+            id: '1',
+            description: 'Almoço em 2023',
+            amount: 50,
+            date: dataPassada,
+            category: categoriaAlimentacao,
+            type: 'DESPESA'
+        });
+
+        expect(transacao.date).toEqual(dataPassada);
+    });
+
+    test('deve criar transação com data muito antiga', () => {
+        const dataAntiga = new Date('2020-12-31');
+        const transacao = new Transaction({
+            id: '2',
+            description: 'Jantar de ano novo 2020',
+            amount: 150,
+            date: dataAntiga,
+            category: categoriaAlimentacao,
+            type: 'DESPESA'
+        });
+        expect(transacao.date).toEqual(dataAntiga);
+    });
+
+    test('deve validar transação com data futura (se aplicável)', () => {
+        const dataFutura = new Date();
+        dataFutura.setDate(dataFutura.getDate() + 1); // Amanhã
+
+        const transacao = new Transaction({
+            id: '3',
+            description: 'Almoço de amanhã',
+            amount: 50,
+            date: dataFutura,
+            category: categoriaAlimentacao,
+            type: 'DESPESA'
+        });
+
+        expect(transacao.date).toEqual(dataFutura);
+    });
+});
