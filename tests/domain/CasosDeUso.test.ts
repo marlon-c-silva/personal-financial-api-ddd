@@ -62,30 +62,30 @@ describe('CasosDeUso', () => {
 
   describe('ObterAnaliseFinanceiraUseCase', () => {
     test('deve retornar análise financeira correta', async () => {
-      // Criar algumas transações de teste
+      
       await criarTransacaoUseCase.execute({
         description: 'Salário',
-        amount: 3000,
+        amount: 3200,
         type: 'RECEITA'
       });
 
       await criarTransacaoUseCase.execute({
         description: 'Almoço',
-        amount: 50,
+        amount: 40,
         type: 'DESPESA'
       });
 
       await criarTransacaoUseCase.execute({
         description: 'Uber',
-        amount: 25,
+        amount: 35,
         type: 'DESPESA'
       });
 
       const analise = await obterAnaliseFinanceiraUseCase.execute();
 
-      expect(analise.totalIncome.getValue()).toBe(3000);
+      expect(analise.totalIncome.getValue()).toBe(3200);
       expect(analise.totalExpenses.getValue()).toBe(75);
-      expect(analise.balance.getValue()).toBe(2925);
+      expect(analise.balance.getValue()).toBe(3125);
       expect(analise.categorySummaries.length).toBeGreaterThan(0);
     });
 
